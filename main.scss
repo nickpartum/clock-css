@@ -1,0 +1,100 @@
+$black: #1b1e23;
+$size: 200px;
+$white: #f4eed7;
+$feature : #4b9aaa;
+
+html,
+body {
+  height: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: sans-serif;
+  color: white;
+  background: $black;
+}
+
+.clock {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  height: $size;
+  width: $size;
+  border-radius: #{$size / 2};
+  background-color: rgba(255,255,255,0.1);
+  box-shadow:
+          10px 10px 20px rgba(0, 0, 0, 0.5),
+          -10px -10px 20px rgba(255,255,255,0.05);
+  &__second,
+  &__minute,
+  &__hour {
+    position: absolute;
+    left: calc(50% - 1px);
+    width: 2px;
+    background: $white;
+    transform-origin: bottom center;
+    border-radius: 1px;
+    z-index: 2;
+  }
+
+  &__second {
+    height: #{($size / 2) - 10};
+    margin-top: 10px;
+    background: $feature;
+    animation: time 60s infinite steps(60);
+    z-index: 3;
+  }
+  &__minute {
+    height: #{($size / 2) - 20};
+    margin-top: 20px;
+    opacity: 0.75;
+    animation: time 3600s linear infinite;
+  }
+  &__hour {
+    height: #{($size / 2) - 40};
+    margin-top: 40px;
+    animation: time 43200s linear infinite;
+  }
+  &__indicator {
+    position: absolute;
+    left: calc(50% - 1px);
+    width: 2px;
+    height: #{$size - 4};
+    border-top: 2px solid $feature;
+    border-bottom: 2px solid $feature;
+    border-radius: 1px;
+    background: none;
+    transform-origin: center;
+    z-index: 2;
+  }
+  &__indicator:nth-of-type(5n) {
+    opacity: 1;
+    height: #{$size - 15};
+    border-top: 7px solid $white;
+    border-bottom: 7px solid $white;
+  }
+  &__center {
+    position: absolute;
+    top: #{$size / 2 - 4};
+    width: 8px;
+    height: 8px;
+    background: $feature;
+    border-radius: 50%;
+    z-index: 4;
+  }
+}
+
+@for $i from 1 through 30 {
+  section:nth-of-type(#{$i}) {
+    transform: rotateZ(calc(6deg * #{$i}));
+  }
+}
+
+@keyframes time {
+  to {
+    transform: rotateZ(360deg);
+  }
+}
