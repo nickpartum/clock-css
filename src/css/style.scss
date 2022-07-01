@@ -1,5 +1,8 @@
+@use "sass:math";
+
 $black: #1b1e23;
 $size: 200px;
+$halfSize: #{math.div($size, 2)};
 $white: #f4eed7;
 $feature : #4b9aaa;
 
@@ -23,7 +26,7 @@ body {
   justify-content: center;
   height: $size;
   width: $size;
-  border-radius: #{$size / 2};
+  border-radius: #{$halfSize};
   background-color: rgba(255,255,255,0.1);
   box-shadow:
           10px 10px 20px rgba(0, 0, 0, 0.5),
@@ -41,20 +44,20 @@ body {
   }
 
   &__second {
-    height: #{($size / 2) - 10};
+    height: #{$halfSize - 10};
     margin-top: 10px;
     background: $feature;
     animation: time 60s infinite steps(60);
     z-index: 3;
   }
   &__minute {
-    height: #{($size / 2) - 20};
+    height: #{$halfSize - 20};
     margin-top: 20px;
     opacity: 0.75;
     animation: time 3600s linear infinite;
   }
   &__hour {
-    height: #{($size / 2) - 40};
+    height: #{$halfSize - 40};
     margin-top: 40px;
     animation: time 43200s linear infinite;
   }
@@ -78,7 +81,7 @@ body {
   }
   &__center {
     position: absolute;
-    top: #{$size / 2 - 4};
+    top: #{$halfSize - 4};
     width: 8px;
     height: 8px;
     background: $feature;
